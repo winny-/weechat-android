@@ -96,7 +96,7 @@ public class Linkify {
         // url must be preceded by a word boundary
         "\\b" +
         // protocol:// or www.
-        "(?:[A-z]+://|www\\.)" +
+        "(?:[A-Za-z]+://|www\\.)" +
         // optional user:pass at
         "(?:\\S+(?::\\S*)?@)?" +
         "(?:" +
