@@ -88,8 +88,9 @@ public class Linkify {
         }
     }
 
-    final private static String IRIC = "[a-zA-Z0-9\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]";
-    final private static String GLTDC = "[a-zA-Z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]";
+    final private static String IRIC   = "[a-zA-Z0-9\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]";
+    final private static String IRIC_H = "[a-zA-Z0-9\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF-]";
+    final private static String GLTDC  = "[a-zA-Z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]";
 
     final private static Pattern URL = Pattern.compile(
         // url must be preceded by a word boundary
@@ -110,7 +111,7 @@ public class Linkify {
               "(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))" +
         "|" +
               // domain name (a.b.c.com)
-              "(?:" + IRIC + "+(?:-" + IRIC + "+)*\\.)+" +  // (\w+(-\w+)*\.)+      a. a-b. a-b.a-b.
+              "(?:" + IRIC + "+(?:" + IRIC_H + "*" + IRIC + "+|"+ IRIC + ")*\\.)+" +  // (\w+((-|\w)*\w|\w)*\.)+      a. a-b. a-b.a-b. a---b. a--b.a--b.
               GLTDC + "{2,63}" +                            // (\w){2,63}           com ninja
         ")" +
         // port?
